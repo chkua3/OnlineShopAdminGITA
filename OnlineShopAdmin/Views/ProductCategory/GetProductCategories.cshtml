@@ -1,0 +1,80 @@
+﻿@model IResponse<PagedList<GetProductCategoriesResponse>>
+
+@{
+    ViewData["Title"] = "Product Categories";
+    var productCategoriesModel = Model.Data;
+}
+
+@if (TempData.ContainsKey("ErrorMessage"))
+{
+    <h3 style="color: red">@TempData["ErrorMessage"]</h3>
+}
+
+<button type="button" class="btn btn-success"><a asp-action="Create">Create New</a></button>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Category Id</th>
+            <th>Name</th>
+            <th>Parent Product Category Id</th>
+            <th>Parent Product Category Name</th>
+            <th>Total Product In Category</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var productCategory in productCategoriesModel)
+        {
+            var dataTargetGuid = Guid.NewGuid();
+
+            <tr>
+                <td>@productCategory.ProductCategory.ProductCategoryId</td>
+                <td>@productCategory.ProductCategory.Name</td>
+                <td>@productCategory.ProductCategory.ParentProductCategory?.ProductCategoryId</td>
+                <td>@productCategory.ProductCategory.ParentProductCategory?.Name</td>
+                <td>@productCategory.ProductInCategory</td>
+                <td>
+                    <button type="button" class="btn btn-info">
+                        @Html.ActionLink("Details", "GetProductCategoryById", new { productCategory.ProductCategory.ProductCategoryId })
+                    </button> |
+                    <button type="button" class="btn btn-warning">
+                        @Html.ActionLink("Edit", "Update", new { productCategory.ProductCategory.ProductCategoryId })
+                    </button> |
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@dataTargetGuid">
+                        Delete
+                    </button>
+
+                    <div class="modal fade" id="@dataTargetGuid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    @* <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> *@
+                                    <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure want to delete this item?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger">
+                                        @Html.ActionLink("Delete", "Delete", new { productCategory.ProductCategory.ProductCategoryId })
+                                    </button> |
+                                    <button type="button" class="btn btn-warning">
+                                        @Html.ActionLink("Edit", "Update", new { productCategory.ProductCategory.ProductCategoryId })
+                                    </button> |
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<paging 
+    query-string-key-page-no="PageNumber"
+    page-no="@Model.Data.CurrentPage"
+    query-string-key-page-size="PageSize"
+    page-size="@Model.Data.PageSize"
+    total-records="@Model.Data.TotalCount">
+</paging>

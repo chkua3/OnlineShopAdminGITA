@@ -1,0 +1,58 @@
+﻿@model GetSalesOrderDetailResponse
+
+@{
+    var salesOrderDetailModel = Model.SalesOrderDetail;
+    ViewData["Title"] = salesOrderDetailModel.SalesOrderDetailId;
+}
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderDetailModel.SalesOrderId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderDetailModel.SalesOrderId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderDetailModel.SalesOrderDetailId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderDetailModel.SalesOrderDetailId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderDetailModel.OrderQty)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderDetailModel.OrderQty)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderDetailModel.ProductId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderDetailModel.ProductId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderDetailModel.UnitPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderDetailModel.UnitPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderDetailModel.UnitPriceDiscount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderDetailModel.UnitPriceDiscount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderDetailModel.LineTotal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderDetailModel.LineTotal)
+        </dd>
+    </dl>
+</div>
+<div>
+    <button type="button" class="btn btn-secondary">
+        <a asp-action="GetSalesOrderHeaders">Back to List</a>
+    </button>
+</div>

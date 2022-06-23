@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineShopAdmin.Base\OnlineShopAdmin.Base.csproj" />
+    <ProjectReference Include="..\OnlineShopAdmin.Common\OnlineShopAdmin.Common.csproj" />
+    <ProjectReference Include="..\OnlineShopAdmin.DataAccess\OnlineShopAdmin.DataAccess.csproj" />
+  </ItemGroup>
+
+</Project>

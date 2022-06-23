@@ -1,0 +1,82 @@
+﻿@model IResponse<PagedList<GetCustomersResponse>>
+
+@{
+    ViewData["Title"] = "customers";
+    var customers = Model.Data;
+}
+
+@if (TempData.ContainsKey("ErrorMessage"))
+{
+    <h3 style="color: red">@TempData["ErrorMessage"]</h3>
+}
+
+<button type="button" class="btn btn-success"><a asp-action="Create">Create New</a></button>
+<table class="table">
+    <thead>
+    <tr>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>CompanyName</th>
+        <th>EmailAddress</th>
+        <th>Phone</th>
+        <th>Number Of Addresses</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var customer in customers)
+    {
+        var dataTargetGuid = Guid.NewGuid();
+
+        <tr>
+            <td>@customer.Customer.FirstName</td>
+            <td>@customer.Customer.LastName</td>
+            <td>@customer.Customer.CompanyName</td>
+            <td>@customer.Customer.EmailAddress</td>
+            <td>@customer.Customer.Phone</td>
+            <td>@customer.NumberOfAddresses</td>
+            <td>
+                <button type="button" class="btn btn-info">
+                    @Html.ActionLink("Details", "GetCustomerById", new { customer.Customer.CustomerId })
+                </button> |
+                <button type="button" class="btn btn-warning">
+                    @Html.ActionLink("Edit", "Update", new { customer.Customer.CustomerId })
+                </button> |
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@dataTargetGuid">
+                    Delete
+                </button>
+
+                <div class="modal fade" id="@dataTargetGuid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure want to delete this item?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger">
+                                    @Html.ActionLink("Delete", "Delete", new { customer.Customer.CustomerId })
+                                </button> |
+                                <button type="button" class="btn btn-warning">
+                                    @Html.ActionLink("Edit", "Update", new { customer.Customer.CustomerId })
+                                </button> |
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<paging 
+    query-string-key-page-no="PageNumber"
+    page-no="@Model.Data.CurrentPage"
+    query-string-key-page-size="PageSize"
+    page-size="@Model.Data.PageSize"
+    total-records="@Model.Data.TotalCount">
+</paging>
+

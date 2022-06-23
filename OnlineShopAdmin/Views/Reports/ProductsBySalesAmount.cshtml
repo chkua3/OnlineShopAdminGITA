@@ -1,0 +1,47 @@
+﻿@model GetProductsBySalesAmountResponse
+
+@{
+    ViewData["Title"] = "ProductsBySalesAmount";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ProductId</th>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Size</th>
+            <th>Weight</th>
+            <th>Total sales</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ProductsBySalesAmount)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Size)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToTalSales)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-info">
+    @Html.ActionLink("Back To Reports", "ChooseReport")
+</button>

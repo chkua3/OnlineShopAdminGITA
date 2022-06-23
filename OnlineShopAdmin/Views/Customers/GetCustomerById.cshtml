@@ -1,0 +1,114 @@
+﻿@model GetCustomerResponse
+
+@{
+    var customer = Model.Customer;
+    ViewData["Title"] = $"{customer.FirstName} {customer.LastName}";
+    var dataTargetGuid = Guid.NewGuid();
+}
+
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.CustomerId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.CustomerId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.NameStyle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.NameStyle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.FirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.MiddleName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.MiddleName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.LastName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.Suffix)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.Suffix)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.CompanyName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.CompanyName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.SalesPerson)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.SalesPerson)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.EmailAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.EmailAddress)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.Phone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.Phone)
+        </dd>
+    </dl>
+</div>
+<div>
+    <button type="button" class="btn btn-secondary">
+        <a asp-action="GetCustomers">Back to List</a>
+    </button> |
+
+    <button type="button" class="btn btn-warning">
+        @Html.ActionLink("Edit", "Update", new { customer.CustomerId })
+    </button> |
+
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@dataTargetGuid">
+        Delete
+    </button>
+
+    <div class="modal fade" id="@dataTargetGuid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @* <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> *@
+                    <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure want to delete this item?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger">
+                        @Html.ActionLink("Delete", "Delete", new { customer.CustomerId })
+                    </button> |
+                    <button type="button" class="btn btn-warning">
+                        @Html.ActionLink("Edit", "Update", new { customer.CustomerId })
+                    </button> |
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

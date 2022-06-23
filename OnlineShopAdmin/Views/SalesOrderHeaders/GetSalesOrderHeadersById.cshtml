@@ -1,0 +1,208 @@
+﻿@model GetSalesOrderHeaderResponse
+
+@{
+    var salesOrderHeaderModel = Model.SalesOrderHeader;
+    ViewData["Title"] = salesOrderHeaderModel.SalesOrderId;
+    var dataTargetGuid = Guid.NewGuid();
+}
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.SalesOrderId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.SalesOrderId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.RevisionNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.RevisionNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.OrderDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.OrderDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.DueDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.DueDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.ShipDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.ShipDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.Status)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.OnlineOrderFlag)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.OnlineOrderFlag)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.SalesOrderNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.SalesOrderNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.PurchaseOrderNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.PurchaseOrderNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.AccountNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.AccountNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.CustomerId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.CustomerId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.ShipToAddressId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.ShipToAddressId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.BillToAddressId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.BillToAddressId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.ShipMethod)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.ShipMethod)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.CreditCardApprovalCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.CreditCardApprovalCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.SubTotal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.SubTotal)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.TaxAmt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.TaxAmt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.Freight)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.Freight)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.TotalDue)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.TotalDue)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => salesOrderHeaderModel.Comment)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => salesOrderHeaderModel.Comment)
+        </dd>
+    </dl>
+    @foreach (var saleOrderDetail in salesOrderHeaderModel.SalesOrderDetails)
+    {
+        <hr />
+        <dl>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => saleOrderDetail.SalesOrderDetailId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => saleOrderDetail.SalesOrderDetailId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => saleOrderDetail.OrderQty)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => saleOrderDetail.OrderQty)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => saleOrderDetail.ProductId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => saleOrderDetail.ProductId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => saleOrderDetail.UnitPrice)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => saleOrderDetail.UnitPrice)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => saleOrderDetail.UnitPriceDiscount)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => saleOrderDetail.UnitPriceDiscount)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => saleOrderDetail.LineTotal)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => saleOrderDetail.LineTotal)
+            </dd>
+        </dl>
+        <button type="button" class="btn btn-info">
+            @Html.ActionLink("Details", "GetSalesOrderDetailsById", new { saleOrderDetail.SalesOrderDetailId })
+        </button>
+        <br />
+        <hr />
+    }
+</div>
+<div>
+    <button type="button" class="btn btn-secondary">
+        <a asp-action="GetSalesOrderHeaders">Back to List</a>
+    </button> |
+
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@dataTargetGuid">
+        Delete
+    </button>
+
+    <div class="modal fade" id="@dataTargetGuid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @* <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> *@
+                    <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure want to delete this item?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger">
+                        @Html.ActionLink("Delete", "DeleteHeader", new { SalesOrderHeaderId = salesOrderHeaderModel.SalesOrderId })
+                    </button> |
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

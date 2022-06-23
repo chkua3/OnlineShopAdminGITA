@@ -1,0 +1,52 @@
+﻿@model IResponse<PagedList<GetSalesOrderDetailsResponse>>
+
+@{
+    ViewData["Title"] = "Detail";
+    var salesOrderDetails = Model.Data;
+}
+
+@if (TempData.ContainsKey("ErrorMessage"))
+{
+    <h3 style="color: red">@TempData["ErrorMessage"]</h3>
+}
+
+<button type="button" class="btn btn-success"><a asp-action="CreateHeader">Create New</a></button>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Sales Order Detail Id</th>
+        <th>OrderQty</th>
+        <th>Product</th>
+        <th>UnitPrice</th>
+        <th>UnitPriceDiscount</th>
+        <th>LineTotal</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var salesOrderDetail in salesOrderDetails)
+    {
+        <tr>
+            <td>@salesOrderDetail.SalesOrderDetail.SalesOrderDetailId</td>
+            <td>@salesOrderDetail.SalesOrderDetail.OrderQty</td>
+            <td>@salesOrderDetail.SalesOrderDetail.Product.Name</td>
+            <td>@salesOrderDetail.SalesOrderDetail.UnitPrice</td>
+            <td>@salesOrderDetail.SalesOrderDetail.UnitPriceDiscount</td>
+            <td>@salesOrderDetail.SalesOrderDetail.LineTotal</td>
+            <td>
+                <button type="button" class="btn btn-info">
+                    @Html.ActionLink("Details", "GetSalesOrderHeadersById", new { salesOrderDetail.SalesOrderDetail.SalesOrderId })
+                </button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<paging 
+    query-string-key-page-no="PageNumber"
+    page-no="@Model.Data.CurrentPage"
+    query-string-key-page-size="PageSize"
+    page-size="@Model.Data.PageSize"
+    total-records="@Model.Data.TotalCount">
+</paging>
+

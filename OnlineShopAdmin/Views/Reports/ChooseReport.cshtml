@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "ChooseReport";
+}
+
+<h1>Choose Report</h1>
+
+<br/>
+<br/>
+
+<button type="button" class="btn btn-info">
+    @Html.ActionLink("Top 10 Customers by Sales amount.", "CustomersBySalesAmount")
+</button>
+
+<br/>
+<br/>
+
+<button type="button" class="btn btn-info">
+    @Html.ActionLink("Top 10 Customers by Sales amount for each year.", "CustomersBySalesAmountForEachYear")
+</button>
+
+<br/>
+<br/>
+
+<button type="button" class="btn btn-info">
+    @Html.ActionLink("Top 10 Products by Sales amount.", "ProductsBySalesAmount")
+</button>
+
+<br/>
+<br/>
+
+<button type="button" class="btn btn-info">
+    @Html.ActionLink("Top 10 Products by Sales profit.", "ProductsBySalesProfit")
+</button>
+
+<br/>
+<br/>
+
+<button type="button" class="btn btn-info">
+    @Html.ActionLink("Top 10 Products by Sales amount for each year", "ProductsBySalesAmountForEachYear")
+</button>

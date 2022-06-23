@@ -1,0 +1,71 @@
+﻿@model GetProductCategoryResponse
+
+@{
+    var productCategoryModel = Model.ProductCategory;
+    ViewData["Title"] = productCategoryModel.Name;
+    var dataTargetGuid = Guid.NewGuid();
+}
+
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => productCategoryModel.ProductCategoryId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => productCategoryModel.ProductCategoryId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => productCategoryModel.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => productCategoryModel.Name)
+        </dd>
+        @if (productCategoryModel.ParentProductCategory != null)
+        {
+            <dt class="col-sm-2">ParentProductCategoryId</dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => productCategoryModel.ParentProductCategory.ProductCategoryId)
+            </dd>
+            <dt class="col-sm-2">ParentProductCategoryName</dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => productCategoryModel.ParentProductCategory.Name)
+            </dd>
+        }
+    </dl>
+</div>
+<div>
+    <button type="button" class="btn btn-secondary">
+        <a asp-action="GetProductCategories">Back to List</a>
+    </button> |
+
+    <button type="button" class="btn btn-warning">
+        @Html.ActionLink("Edit", "Update", new { productCategoryModel.ProductCategoryId })
+    </button> |
+
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@dataTargetGuid">
+        Delete
+    </button>
+
+    <div class="modal fade" id="@dataTargetGuid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @* <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> *@
+                    <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure want to delete this item?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger">
+                        @Html.ActionLink("Delete", "Delete", new { productCategoryModel.ProductCategoryId })
+                    </button> |
+                    <button type="button" class="btn btn-warning">
+                        @Html.ActionLink("Edit", "Update", new { productCategoryModel.ProductCategoryId })
+                    </button> |
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

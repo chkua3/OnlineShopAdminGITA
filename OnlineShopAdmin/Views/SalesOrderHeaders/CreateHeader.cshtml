@@ -1,0 +1,145 @@
+﻿@model OnlineShopAdmin.Services.SalesOrderHeaders.Messages.CreateSalesOrderHeaderRequest
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@if (TempData.ContainsKey("ErrorMessage"))
+{
+    <h3 style="color: red">@TempData["ErrorMessage"]</h3>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateHeader">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OrderDate" class="control-label"></label>
+                <input asp-for="OrderDate" class="form-control" />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DueDate" class="control-label"></label>
+                <input asp-for="DueDate" class="form-control" />
+                <span asp-validation-for="DueDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShipDate" class="control-label"></label>
+                <input asp-for="ShipDate" class="form-control" />
+                <span asp-validation-for="ShipDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OnlineOrderFlag" /> @Html.DisplayNameFor(model => model.OnlineOrderFlag)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalesOrderNumber" class="control-label"></label>
+                <input asp-for="SalesOrderNumber" class="form-control" />
+                <span asp-validation-for="SalesOrderNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PurchaseOrderNumber" class="control-label"></label>
+                <input asp-for="PurchaseOrderNumber" class="form-control" />
+                <span asp-validation-for="PurchaseOrderNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountNumber" class="control-label"></label>
+                <input asp-for="AccountNumber" class="form-control" />
+                <span asp-validation-for="AccountNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                @Html.DropDownListFor(x=>x.CustomerId, ViewBag.Customers as List<SelectListItem>, "Select Customer")
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShipToAddressId" class="control-label"></label>
+                <input asp-for="ShipToAddressId" class="form-control" />
+                <span asp-validation-for="ShipToAddressId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillToAddressId" class="control-label"></label>
+                <input asp-for="BillToAddressId" class="form-control" />
+                <span asp-validation-for="BillToAddressId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShipMethod" class="control-label"></label>
+                <input asp-for="ShipMethod" class="form-control" />
+                <span asp-validation-for="ShipMethod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreditCardApprovalCode" class="control-label"></label>
+                <input asp-for="CreditCardApprovalCode" class="form-control" />
+                <span asp-validation-for="CreditCardApprovalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubTotal" class="control-label"></label>
+                <input asp-for="SubTotal" class="form-control" />
+                <span asp-validation-for="SubTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaxAmt" class="control-label"></label>
+                <input asp-for="TaxAmt" class="form-control" />
+                <span asp-validation-for="TaxAmt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Freight" class="control-label"></label>
+                <input asp-for="Freight" class="form-control" />
+                <span asp-validation-for="Freight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalDue" class="control-label"></label>
+                <input asp-for="TotalDue" class="form-control" />
+                <span asp-validation-for="TotalDue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label"></label>
+                <input asp-for="Comment" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="OrderQty" class="control-label"></label>
+                <input asp-for="OrderQty" class="form-control" />
+                <span asp-validation-for="OrderQty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductId" class="control-label"></label>
+                @Html.DropDownListFor(x=>x.ProductId, ViewBag.Products as List<SelectListItem>, "Select Product")
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitPrice" class="control-label"></label>
+                <input asp-for="UnitPrice" class="form-control" />
+                <span asp-validation-for="UnitPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitPriceDiscount" class="control-label"></label>
+                <input asp-for="UnitPriceDiscount" class="form-control" />
+                <span asp-validation-for="UnitPriceDiscount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LineTotal" class="control-label"></label>
+                <input asp-for="LineTotal" class="form-control" />
+                <span asp-validation-for="LineTotal" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" /> |
+                <button type="button" class="btn btn-secondary">
+                    <a asp-action="GetSalesOrderHeaders">Cancel</a>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

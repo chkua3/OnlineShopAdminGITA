@@ -1,0 +1,135 @@
+﻿@model GetProductResponse
+
+@{
+    var productModel = Model.Product;
+    ViewData["Title"] = productModel.Name;
+    var dataTargetGuid = Guid.NewGuid();
+}
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => productModel.ProductId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => productModel.ProductId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => productModel.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => productModel.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => productModel.ProductNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => productModel.ProductNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => productModel.Color)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => productModel.Color)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => productModel.StandardCost)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => productModel.StandardCost)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => productModel.ListPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => productModel.ListPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => productModel.Size)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => productModel.Size)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => productModel.Weight)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => productModel.Weight)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => productModel.ProductCategoryId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => productModel.ProductCategoryId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => productModel.ProductModelId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => productModel.ProductModelId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => productModel.SellStartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => productModel.SellStartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => productModel.SellEndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => productModel.SellEndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => productModel.DiscontinuedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => productModel.DiscontinuedDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => productModel.FileName)
+        </dt>
+        @if (!string.IsNullOrWhiteSpace(Model.Product.FileExtension) && !string.IsNullOrWhiteSpace(Model.Product.FileName))
+        {
+            <dd class="col-sm-10">
+                <img src="data:image/@Model.Product.FileExtension;base64, @Model.Product.FileName" style="height:200px;width:200px;" alt=""/>
+            </dd>
+        }
+    </dl>
+</div>
+<div>
+    <button type="button" class="btn btn-secondary">
+        <a asp-action="GetProducts">Back to List</a>
+    </button> |
+
+    <button type="button" class="btn btn-warning">
+        @Html.ActionLink("Edit", "Update", new { productModel.ProductId })
+    </button> |
+
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@dataTargetGuid">
+        Delete
+    </button>
+
+    <div class="modal fade" id="@dataTargetGuid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @* <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> *@
+                    <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure want to delete this item?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger">
+                        @Html.ActionLink("Delete", "Delete", new { productModel.ProductId })
+                    </button> |
+                    <button type="button" class="btn btn-warning">
+                        @Html.ActionLink("Edit", "Update", new { productModel.ProductId })
+                    </button> |
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

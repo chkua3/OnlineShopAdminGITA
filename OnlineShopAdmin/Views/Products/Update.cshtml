@@ -1,0 +1,126 @@
+﻿@model OnlineShopAdmin.Services.Products.Messages.UpdateProductRequest
+
+@{
+    ViewData["Title"] = "Update";
+    var dataTargetGuid = Guid.NewGuid();
+}
+
+@if (TempData.ContainsKey("ErrorMessage"))
+{
+    <h3 style="color: red">@TempData["ErrorMessage"]</h3>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Update" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @* <label asp-for="ProductId" class="control-label"></label> *@
+                <input asp-for="ProductId" type="hidden" class="form-control" />
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductNumber" class="control-label"></label>
+                <input asp-for="ProductNumber" class="form-control" />
+                <span asp-validation-for="ProductNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Color" class="control-label"></label>
+                <input asp-for="Color" class="form-control" />
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StandardCost" class="control-label"></label>
+                <input asp-for="StandardCost" class="form-control" />
+                <span asp-validation-for="StandardCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ListPrice" class="control-label"></label>
+                <input asp-for="ListPrice" class="form-control" />
+                <span asp-validation-for="ListPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <input asp-for="Size" class="form-control" />
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weight" class="control-label"></label>
+                <input asp-for="Weight" class="form-control" />
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductCategoryId" class="control-label"></label>
+                @Html.DropDownListFor(x => x.ProductCategoryId, ViewBag.Categories as List<SelectListItem>, "Select Category")
+                <span asp-validation-for="ProductCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductModelId" class="control-label"></label>
+                @Html.DropDownListFor(x=>x.ProductModelId, ViewBag.ProductModels as List<SelectListItem>, "Select product model")
+                <span asp-validation-for="ProductModelId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SellStartDate" class="control-label"></label>
+                <input asp-for="SellStartDate" class="form-control" />
+                <span asp-validation-for="SellStartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SellEndDate" class="control-label"></label>
+                <input asp-for="SellEndDate" class="form-control" />
+                <span asp-validation-for="SellEndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiscontinuedDate" class="control-label"></label>
+                <input asp-for="DiscontinuedDate" class="form-control" />
+                <span asp-validation-for="DiscontinuedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="File" class="control-label"></label>
+                <input asp-for="File" type="file" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" /> |
+                <button type="button" class="btn btn-secondary">
+                    <a asp-action="GetProducts">Back to List</a>
+                </button> |
+
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@dataTargetGuid">
+                    Delete
+                </button>
+
+                <div class="modal fade" id="@dataTargetGuid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                @* <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> *@
+                                <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure want to delete this item?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger">
+                                    @Html.ActionLink("Delete", "Delete", new { Model.ProductId })
+                                </button> |
+                                <button type="button" class="btn btn-warning">
+                                    @Html.ActionLink("Edit", "Update", new { Model.ProductId })
+                                </button> |
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

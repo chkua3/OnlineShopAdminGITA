@@ -1,0 +1,79 @@
+﻿@model IResponse<PagedList<GetSalesOrderHeadersResponse>>
+
+@{
+    ViewData["Title"] = "Products";
+    var salesOrderHeaders = Model.Data;
+}
+
+@if (TempData.ContainsKey("ErrorMessage"))
+{
+    <h3 style="color: red">@TempData["ErrorMessage"]</h3>
+}
+
+<button type="button" class="btn btn-success"><a asp-action="CreateHeader">Create New</a></button>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Sales Order Id</th>
+        <th>Ship Date</th>
+        <th>Status</th>
+        <th>Sales Order Number</th>
+        <th>Purchase Order Number</th>
+        <th>Account Number</th>
+        <th>Customer</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var salesOrderHeader in salesOrderHeaders)
+    {
+        var dataTargetGuid = Guid.NewGuid();
+
+        <tr>
+            <td>@salesOrderHeader.SalesOrderHeader.SalesOrderId</td>
+            <td>@salesOrderHeader.SalesOrderHeader.ShipDate</td>
+            <td>@salesOrderHeader.SalesOrderHeader.Status</td>
+            <td>@salesOrderHeader.SalesOrderHeader.SalesOrderNumber</td>
+            <td>@salesOrderHeader.SalesOrderHeader.PurchaseOrderNumber</td>
+            <td>@salesOrderHeader.SalesOrderHeader.AccountNumber</td>
+            <td>@salesOrderHeader.CustomerFullName</td>
+            <td>
+                <button type="button" class="btn btn-info">
+                    @Html.ActionLink("Details", "GetSalesOrderHeadersById", new { salesOrderHeader.SalesOrderHeader.SalesOrderId })
+                </button> |
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@dataTargetGuid">
+                    Delete
+                </button>
+
+                <div class="modal fade" id="@dataTargetGuid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                @* <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> *@
+                                <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure want to delete this item?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger">
+                                    @Html.ActionLink("Delete", "DeleteHeader", new { salesOrderHeader.SalesOrderHeader.SalesOrderId })
+                                </button>|
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<paging 
+    query-string-key-page-no="PageNumber"
+    page-no="@Model.Data.CurrentPage"
+    query-string-key-page-size="PageSize"
+    page-size="@Model.Data.PageSize"
+    total-records="@Model.Data.TotalCount">
+</paging>
+

@@ -1,0 +1,67 @@
+﻿@model GetCustomersBySalesAmountForEachYearResponse
+
+@{
+    ViewData["Title"] = "CustomersBySalesAmountForEachYear";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>CustomerId</th>
+            <th>Title</th>
+            <th>FirstName</th>
+            <th>MiddleName</th>
+            <th>LastName</th>
+            <th>Suffix</th>
+            <th>CompanyName</th>
+            <th>SalesPerson</th>
+            <th>EmailAddress</th>
+            <th>Phone</th>
+            <th>Order Year</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CustomerBySalesAmountForEachYear)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.CustomerId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.MiddleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Suffix)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.SalesPerson)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.EmailAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderYear)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-info">
+    @Html.ActionLink("Back To Reports", "ChooseReport")
+</button>
