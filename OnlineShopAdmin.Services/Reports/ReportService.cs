@@ -70,12 +70,12 @@ public class ReportService : IReportService
     {
         var query = await _unitOfWork.Query<SalesOrderDetail>().ToListAsync();
 
-        var salesOrderHeaders = query
+        var salesOrderDetails = query
             .GroupBy(x => x.ProductId)
             .OrderByDescending(g => g.Count());
 
-        var customersBySalesAmount = (
-                from salesOrderHeader in salesOrderHeaders
+        var productsBySalesAmount = (
+                from salesOrderHeader in salesOrderDetails
                 let product = salesOrderHeader.Select(x => x).First(x => x.Product != null).Product
                 let productResponseModel = _mapper.Map<ProductResponseModel>(product)
                 select new GetProductBySalesAmountResponse
@@ -86,13 +86,31 @@ public class ReportService : IReportService
             .Take(10)
             .ToList();
 
-        return ResponseHelper.Ok(new GetProductsBySalesAmountResponse { ProductsBySalesAmount = customersBySalesAmount });
+        return ResponseHelper.Ok(new GetProductsBySalesAmountResponse { ProductsBySalesAmount = productsBySalesAmount });
     }
 
     public async Task<IResponse<GetProductsBySalesProfitResponse>> ProductsBySalesProfit()
     {
-        //TODO
-        return null;
+        var query = await _unitOfWork.Query<SalesOrderDetail>().ToListAsync();
+
+        var salesOrderDetails = query
+            .GroupBy(x => x.ProductId)
+            .OrderByDescending(g => g.Count());
+
+        var productsBySalesProfit = (
+                from salesOrderDetail in salesOrderDetails
+                let product = salesOrderDetail.Select(x => x).First(x => x.Product != null).Product
+                let productResponseModel = _mapper.Map<ProductResponseModel>(product)
+                select new GetProductBySalesProfitResponse
+                {
+                    Product = productResponseModel,
+                    ToTalProfit = salesOrderDetail.Sum(x => x.LineTotal)
+                })
+            .OrderByDescending(x => x.ToTalProfit)
+            .Take(10)
+            .ToList();
+
+        return ResponseHelper.Ok(new GetProductsBySalesProfitResponse { ProductBySalesProfit = productsBySalesProfit });
     }
 
     public async Task<IResponse<GetProductsBySalesAmountForEachYearResponse>> ProductsBySalesAmountForEachYear()
