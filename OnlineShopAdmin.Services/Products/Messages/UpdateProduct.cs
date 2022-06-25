@@ -58,7 +58,12 @@ public class UpdateProductRequestValidator : AbstractValidator<UpdateProductRequ
             .When(request => request.SellEndDate.HasValue);
         RuleFor(request => request.DiscontinuedDate).Must(request => request != default)
             .When(request => request.DiscontinuedDate.HasValue);
-        RuleFor(request => request.File).Must(request => request.FileName.Length <= 50)
+        RuleFor(request => request.File)
+            .Must(request => request.FileName.Length <= 50)
+            .Must(file =>
+                file.ContentType.Equals("image/jpeg") ||
+                file.ContentType.Equals("image/jpg") ||
+                file.ContentType.Equals("image/png"))
             .When(request => request.File != null);
     }
 }
